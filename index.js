@@ -13,10 +13,11 @@ var app5 = new Vue({
             return res.json()
         }).then(data => {
             console.log(data)
-            this.history.push({'text':data[0]['text'], 'index':data[0]['index']})
-            this.message = data[0]['text']
+            this.history.push({'text':data['text'], 'index':data['index']})
+            this.message = data['text']
         })
     //   this.message = this.message.split('').reverse().join('')
+    // 
     }
   }
 })
