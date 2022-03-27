@@ -1,0 +1,63 @@
+<template>
+  <div class="hello">
+    <h1>성경 찾기 앱</h1>
+    <p>
+      사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요.
+    </p>
+    <h3>이곳에 결과가 출력 됩니다.</h3>
+    <p :key="i" v-for="(result, i) in history">{{result.index}}{{result.text}}</p>
+
+    <input v-model="input"/>
+    <button v-on:click="reverseMessage">검색</button>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  },
+  data(){
+    return{
+      input: '롬5:1',
+      history:[],
+      message: '이곳에 결과가 나옵니다.'
+    }
+  },
+  methods: {
+    reverseMessage: function () {
+      const input = this.input
+      fetch('https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/find/single/'+input)
+        .then(res => {
+          return res.json()
+        }).then(data => {
+        console.log(data)
+        this.history.push({'text':data['text'], 'index':data['index']})
+        this.message = data['text']
+      })
+      //   this.message = this.message.split('').reverse().join('')
+      //
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>

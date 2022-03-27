@@ -1,9 +1,11 @@
 var app5 = new Vue({
   el: '#app-5',
-  data: {
-    input: '롬5:1',
-    history:[],
-    message: '이곳에 결과가 나옵니다.'
+  data: function() {
+    return {
+        input: '롬5:1',
+        history:[],
+        message: '이곳에 결과가 나옵니다.'
+    };
   },
   methods: {
     reverseMessage: function () {
@@ -17,7 +19,7 @@ var app5 = new Vue({
             this.message = data['text']
         })
     //   this.message = this.message.split('').reverse().join('')
-    // 
+    //
     }
   }
 })
