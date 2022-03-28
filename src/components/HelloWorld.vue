@@ -40,6 +40,16 @@ export default {
       //   this.message = this.message.split('').reverse().join('')
       //
     }
+  },
+  created() {
+    const dr = {'recentUrl':window.location.href, 'preUrl':document.referrer}
+    // 이전 방문 페이지, 현재 방문 페이지 메세지 보내기
+    fetch(`https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text=${JSON.stringify(dr)}`)
+      .then(res => {
+        return res.json()
+      }).then(data => {
+        console.log(data)
+    })
   }
 }
 </script>
