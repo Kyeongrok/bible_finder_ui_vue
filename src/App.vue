@@ -1,26 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/images.jpeg">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id='nav'>
+    <router-link to="/">
+      <button id="myButton" class="foo bar">성경찾기</button>
+      </router-link>
+    <router-link to="/about">
+      <button id="about" class="foo bar">자리배치</button>
+      </router-link>
+  </div>
+  <router-view />
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

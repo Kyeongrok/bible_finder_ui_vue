@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
+    <img alt="Vue logo" src="../assets/images.jpeg">
     <h1>성경 찾기 앱</h1>
     <p>
       사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요.
     </p>
     <h3>이곳에 결과가 출력 됩니다.</h3>
-    <p :key="i" v-for="(result, i) in history">{{result.index}}{{result.text}}</p>
+    <p :key="i" v-for="(result, i) in history">{{result.router}}{{result.text}}</p>
 
     <input v-model="input"/>
     <button v-on:click="reverseMessage">검색</button>

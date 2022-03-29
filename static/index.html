@@ -16,12 +16,12 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
+
         <div id="app-5">
             <h2>이곳에 값이 출력 됩니다..</h2>
-            <p v-for="result in history">{{result.index}}{{result.text}}</p>
+            <p v-for="result in history">{{result.router}}{{result.text}}</p>
             <input v-model="input"/>
-            <button v-on:click="reverseMessage">검색</button> 
+            <button v-on:click="reverseMessage">검색</button>
         </div>
 
         <script src="index.js?v1.0" async defer></script>

@@ -1,18 +1,14 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import HelloWorld from '../views/HelloWorld';
-import pageOne from '../views/About';
+import {createRouter, createWebHistory} from 'vue-router';
+import about from '@/views/Seats';
+import HelloWorld from "@/views/BibleFinder";
 
-Vue.use(VueRouter)
+const routerHistory = createWebHistory()
+const router = createRouter({
+  history: routerHistory,
+  routes:[
+    { path:"/", name: "home", component:HelloWorld },
+    { path:"/about", name: "about", component:about }
+  ]
+})
 
-const routes = [
-  { path:"/", name: "home", component:HelloWorld },
-  { path:"/about", name: "about", component:pageOne }
-
-];
-
-const router = new VueRouter({
-  mode: "history",
-  routes,
-});
 export default router
