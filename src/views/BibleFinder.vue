@@ -14,7 +14,10 @@
       </tr>
       </thead>
       <tbody>
-        <tr :key="i" v-for="(result, i) in history">{{result.index}}{{result.text}}</tr>
+        <tr :key="i" v-for="(result, i) in history">
+          <td>{{result.index}}</td>
+          <td>{{result.text}}</td>
+        </tr>
       </tbody>
     </table>
 

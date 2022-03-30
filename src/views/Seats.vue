@@ -1,9 +1,19 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-4">인원 수:{{names.length}}</div>
-      <div class="col-md-4">시작주:<input type="text" v-model="weeksFrom"></div>
-      <div class="col-md-4">끝주:<input type="text" v-model="weeksTo"></div>
+
+      <div class="col-md-4">
+        <label for="cnt" class="form-label">인원 수</label>
+        <input type="text" id="cnt" class="form-control me-2" v-bind:value=names.length>
+      </div>
+      <div class="col-md-4">
+        <label for="startWeek" class="form-label">시작주</label>
+        <input type="text" id="startWeek" class="form-control me-2" v-model="weeksFrom">
+      </div>
+      <div class="col-md-4">
+        <label for="endWeek" class="form-label">끝주</label>
+        <input type="text" id="endWeek" class="form-control me-2" v-model="weeksTo">
+      </div>
     </div>
     <span :key="i" v-for="(name, i) in names">{{name}}</span>
     <br/>
@@ -21,13 +31,11 @@ export default {
   name: "SeatsSep",
   data(){
     return{
-      input: '롬5:1',
       names:[],
       results:[],
       weeksFrom:1,
       weeksTo:40,
-      currentName:"",
-      message: '이곳에 결과가 나옵니다.'
+      currentName:"조원1",
     }
   },
   methods: {
