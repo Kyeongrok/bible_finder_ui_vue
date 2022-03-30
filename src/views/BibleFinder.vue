@@ -5,7 +5,11 @@
     <p>
       사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요.
     </p>
-    <h3>이곳에 결과가 출력 됩니다.</h3>
+    <div class="row">
+      <div class="col-md-2">
+        마지막 검색: <button class="btn-dark">{{this.history}}</button>
+      </div>
+    </div>
     <table class="table table-striped">
       <thead>
       <tr>
@@ -14,7 +18,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr :key="i" v-for="(result, i) in history">
+        <tr :key="i" v-for="(result, i) in searchResults">
           <td>{{result.index}}</td>
           <td>{{result.text}}</td>
         </tr>
@@ -39,8 +43,8 @@ export default {
   data(){
     return{
       input: '롬5:1',
+      searchResults:[],
       history:[],
-      message: '이곳에 결과가 나옵니다.'
     }
   },
   methods: {
@@ -51,11 +55,15 @@ export default {
           return res.json()
         }).then(data => {
         console.log(data)
-        this.history.push(data)
-        this.message = data['text']
+        this.searchResults.push(data)
+        this.$cookies.set('data', data)
+        this.setHistoryFromCookie()
       })
-      //   this.message = this.message.split('').reverse().join('')
-      //
+    },
+    setHistoryFromCookie: function() {
+      this.history=[];
+      const cookie = this.$cookies.get('data')
+      this.history.push(cookie.index)
     }
   },
   created() {
@@ -68,6 +76,9 @@ export default {
       }).then(data => {
         console.log(data)
     })
+  },
+  mounted() {
+    this.setHistoryFromCookie()
   }
 }
 </script>
