@@ -1,16 +1,29 @@
 <template>
-  <div class="hello">
-    <img alt="Vue logo" src="../assets/images.jpeg">
+  <img alt="Vue logo" src="../assets/images.jpeg">
+  <div class="row">
     <h1>성경 찾기 앱</h1>
     <p>
       사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요.
     </p>
     <h3>이곳에 결과가 출력 됩니다.</h3>
-    <p :key="i" v-for="(result, i) in history">{{result.router}}{{result.text}}</p>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">내용</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr :key="i" v-for="(result, i) in history">{{result.index}}{{result.text}}</tr>
+      </tbody>
+    </table>
 
-    <input v-model="input"/>
-    <button v-on:click="reverseMessage">검색</button>
-
+  </div>
+  <div class="row">
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" v-model="input" placeholder="Search" aria-label="Search">
+      <button @click="reverseMessage" class="btn btn-outline-success" type="button">Search</button>
+    </form>
   </div>
 </template>
 
@@ -35,7 +48,7 @@ export default {
           return res.json()
         }).then(data => {
         console.log(data)
-        this.history.push({'text':data['text'], 'index':data['index']})
+        this.history.push(data)
         this.message = data['text']
       })
       //   this.message = this.message.split('').reverse().join('')
@@ -43,6 +56,7 @@ export default {
     }
   },
   created() {
+    this.reverseMessage();
     const dr = {'recentUrl':window.location.href, 'preUrl':document.referrer}
     // 이전 방문 페이지, 현재 방문 페이지 메세지 보내기
     fetch(`https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text=${JSON.stringify(dr)}`)

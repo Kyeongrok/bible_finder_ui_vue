@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <div>인원 수:{{names.length}} 시작주:<input type="text" v-model="weeksFrom"> 끝주:<input type="text" v-model="weeksTo"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">인원 수:{{names.length}}</div>
+      <div class="col-md-4">시작주:<input type="text" v-model="weeksFrom"></div>
+      <div class="col-md-4">끝주:<input type="text" v-model="weeksTo"></div>
+    </div>
     <span :key="i" v-for="(name, i) in names">{{name}}</span>
     <br/>
-    <input type="text" v-model="currentName">
-    <button @click="addNames">+</button>
+
+    <input type="text" v-model="currentName" @keyup.enter="addNames" class="form-control me-2" ref="currentName">
+    <button @click="addNames" class="btn btn-outline-success" type="button">+</button>
     <br/>
-    <button @click="run">만들기</button>
-    <table>
-      <tr :key="i" v-for="(result, i) in results">
-        <td>{{i+1}}</td>
-        <td>{{result}}</td>
-      </tr>
-    </table>
+    <button @click="run" class="btn btn-outline-success">만들기</button>
+    <b-table striped hover :items="results" />
   </div>
 </template>
 
@@ -52,6 +52,9 @@ export default {
       }
       return randomIndexArray
     }
+  },
+  mounted() {
+    this.$refs.currentName.focus()
   }
 }
 </script>
