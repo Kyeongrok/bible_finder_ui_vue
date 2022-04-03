@@ -13,6 +13,7 @@ export default {
   methods: {
     clickBadge() {
       console.log(`${this.idx}번째 조원`)
+      this.emitter.emit('BadgeMemberModified', {idx:this.idx, name:this.name})
     }
   },
   created() {

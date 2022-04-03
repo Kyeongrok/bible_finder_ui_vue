@@ -58,6 +58,7 @@
 
 <script>
 import BadgeMember from "@/components/BadgeMember";
+
 export default {
   name: "SeatsSep",
   components: {BadgeMember},
@@ -107,9 +108,14 @@ export default {
   },
   created() {
     this.init()
+    // EventBus.$on('BadgeMemberClickEvent1', data =>{
+    //   console.log('EventOn:', data)
+    // })
   },
   mounted() {
-
+    this.emitter.on('BadgeMemberModified',data=>{
+      console.log('BadgeMemberModified', data)
+    })
     this.$refs.currentName.focus()
   }
 }
