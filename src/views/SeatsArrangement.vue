@@ -29,11 +29,12 @@
         </div>
       </div>
       <div class="col-md-3">
-        <button @click="init" class="btn btn-outline-success m2-3" type="button">조회</button>
+        <button @click="init" class="btn btn-outline-success m2-3"
+                type="button">조회</button>
       </div>
     </div>
     <!-- 뱃지 영역-->
-    <span class="badge bg-success m-1" :key="i" v-for="(name, i) in names">{{name}}</span>
+    <BadgeMember :name="name" :idx="i" :key="i" v-for="(name, i) in names"/>
     <!-- 자리배치 결과 출력-->
     <table class="table table-striped">
       <thead>
@@ -56,8 +57,10 @@
 </template>
 
 <script>
+import BadgeMember from "@/components/BadgeMember";
 export default {
   name: "SeatsSep",
+  components: {BadgeMember},
   data(){
     return{
       names:[],
