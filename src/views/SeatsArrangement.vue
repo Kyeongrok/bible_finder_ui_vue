@@ -2,14 +2,16 @@
   <div class="container">
 
     <div class="row">
-      사용방법 : 인원수를 입력하고 '조회'버튼을 누르세요.
+      <p>
+        사용방법 : 인원수를 입력하고 '조회'버튼을 누르세요. 아래 조원1, 조원2 ...에 조원 이름을 입력 하시면 됩니다.
+      </p>
     </div>
     <div class="row">
       <div class="col-md-3">
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">인원수</span>
           <input type="text" class="form-control" placeholder="인원수"
-                 @change="init"
+                 @keyup="init"
                  v-model="total" ref="currentName"
                  aria-label="Username" aria-describedby="basic-addon1">
         </div>
@@ -48,7 +50,7 @@
         <td>{{i+1}}주차</td>
         <td>
           <span class="badge bg-success m-1" :key="i" v-for="(v, i) in result">
-          {{names[v]}}</span>
+          {{`${i+1}번:`}}<strong>{{names[v]}}</strong></span>
         </td>
       </tr>
       </tbody>
@@ -57,7 +59,7 @@
 </template>
 
 <script>
-import BadgeMember from "@/components/BadgeMember";
+import BadgeMember from "@/components/InputMember";
 
 export default {
   name: "SeatsSep",
@@ -115,6 +117,7 @@ export default {
   mounted() {
     this.emitter.on('BadgeMemberModified',data=>{
       console.log('BadgeMemberModified', data)
+      this.names[data.idx] = data.name
     })
     this.$refs.currentName.focus()
   }
