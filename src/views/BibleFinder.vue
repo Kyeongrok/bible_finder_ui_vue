@@ -3,7 +3,7 @@
   <div class="row">
     <h1>성경 찾기 앱</h1>
     <p>
-      사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요.
+      사용 방법 : 원하는 주소를 입력한 후 '검색'버튼을 누르세요. ex)롬5:1-2, 롬5:1
     </p>
     <div class="row">
       <div class="col-md-2">
@@ -42,7 +42,7 @@ export default {
   },
   data(){
     return{
-      input: '롬5:1',
+      input: '롬5:1-5',
       searchResults:[],
       history:[],
     }
@@ -50,20 +50,41 @@ export default {
   methods: {
     reverseMessage: function () {
       const input = this.input
-      fetch('https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/find/single/'+input)
-        .then(res => {
-          return res.json()
-        }).then(data => {
-        console.log(data)
-        this.searchResults.push(data)
-        this.$cookies.set('data', data)
-        this.setHistoryFromCookie()
-      })
+      const bibleAddrRe = new RegExp('[가-힣]{1,2}[0-9]{1,3}:[0-9]{1,3}-[0-9]{1,3}', 'g');
+      if (input.search(bibleAddrRe) >= 0) {
+        const addr = `https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/bible/between/${input}`
+        fetch(addr)
+          .then(res => {
+            return res.json()
+          }).then(data => {
+            console.log(data)
+            data.forEach(item=>{
+              this.searchResults.push(item)
+            })
+            this.$cookies.set('data', input)
+            this.setHistoryFromCookie()
+        })
+      } else{
+        fetch('https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/find/single/'+input)
+          .then(res => {
+            return res.json()
+          }).then(data => {
+            console.log(data)
+            this.searchResults.push(data)
+            this.$cookies.set('data', input)
+            this.setHistoryFromCookie()
+        })
+      }
+
+    },
+    findBetween: function () {
+      const addr = `https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/find/between?book=%EC%B0%BD&chapter=1&verseFrom=1&verseTo=2`
+      console.log(addr)
     },
     setHistoryFromCookie: function() {
       this.history=[];
       const cookie = this.$cookies.get('data')
-      this.history.push(cookie.index)
+      this.history.push(cookie)
     }
   },
   created() {

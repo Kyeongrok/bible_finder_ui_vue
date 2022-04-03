@@ -7,7 +7,7 @@ const router = createRouter({
   history: routerHistory,
   routes:[
     { path:"/", name: "home", component:HelloWorld },
-    { path:"/seats-arr", name: "seats-arr", component:about }
+    { path:"/seats-arr", name: "seats-arr", component:about },
   ]
 })
 
