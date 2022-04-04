@@ -27,13 +27,13 @@
 
   </div>
   <div class="row">
-    <form class="d-flex">
-      <div class="col-md-3">
-        <input class="form-control me-2" type="search" v-model="input" placeholder="Search" aria-label="Search">
-      </div>
+    <div class="col-md-3">
+      <input class="form-control me-2" type="search" @keyup.enter="reverseMessage" v-model="input" placeholder="Search" aria-label="Search">
+    </div>
+    <div class="col-md-3">
       <button @click="reverseMessage" class="btn btn-outline-success" type="button">검색</button>
       <button @click="empty" class="btn btn-outline-primary" type="button">초기화</button>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -82,6 +82,7 @@ export default {
             this.setHistoryFromCookie()
         })
       }
+      this.input = ''
 
     },
     findBetween: function () {
