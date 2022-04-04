@@ -28,8 +28,11 @@
   </div>
   <div class="row">
     <form class="d-flex">
-      <input class="form-control me-2" type="search" v-model="input" placeholder="Search" aria-label="Search">
-      <button @click="reverseMessage" class="btn btn-outline-success" type="button">Search</button>
+      <div class="col-md-3">
+        <input class="form-control me-2" type="search" v-model="input" placeholder="Search" aria-label="Search">
+      </div>
+      <button @click="reverseMessage" class="btn btn-outline-success" type="button">검색</button>
+      <button @click="empty" class="btn btn-outline-primary" type="button">초기화</button>
     </form>
   </div>
 </template>
@@ -48,6 +51,10 @@ export default {
     }
   },
   methods: {
+    empty: function () {
+      this.searchResults = []
+      this.input = ''
+    },
     reverseMessage: function () {
       const input = this.input
       const bibleAddrRe = new RegExp('[가-힣]{1,2}[0-9]{1,3}:[0-9]{1,3}-[0-9]{1,3}', 'g');
@@ -65,7 +72,7 @@ export default {
             this.setHistoryFromCookie()
         })
       } else{
-        fetch('https://2kstde4150.execute-api.ap-northeast-1.amazonaws.com/dev/v1/find/single/'+input)
+        fetch('https://jxkjd9ecxh.execute-api.ap-northeast-2.amazonaws.com/dev/v1/find/single/'+input)
           .then(res => {
             return res.json()
           }).then(data => {
