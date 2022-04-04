@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import about from '@/views/SeatsArrangement';
 import HelloWorld from "@/views/BibleFinder";
 import NaverShoppingCrawl from "@/views/NaverShoppingCrawl";
+import ExcelDownload from "@/views/ExcelDownload";
 
 
 const routerHistory = createWebHistory()
@@ -11,6 +12,7 @@ const router = createRouter({
     { path:"/", name: "home", component:HelloWorld },
     { path:"/seats-arr", name: "seats-arr", component:about },
     { path:"/naver-shopping", name: "naver-shopping", component:NaverShoppingCrawl },
+    { path:"/excel", name: "excel", component:ExcelDownload },
   ]
 })
 

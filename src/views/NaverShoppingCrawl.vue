@@ -21,6 +21,7 @@
         <tr>
           <th scope="col">제품명</th>
           <th scope="col">가격</th>
+          <th scope="col">카테고리</th>
           <th scope="col">링크</th>
         </tr>
         </thead>
@@ -28,7 +29,12 @@
         <tr :key="i" v-for="(result, i) in searchResults">
           <td>{{result.name}}</td>
           <td>{{result.price}}</td>
+          <td>
+          <span class="badge bg-success m-1" :key="i" v-for="(v, i) in result.category">
+          {{v}}</span>
+          </td>
           <td><a :href="result.link" target="_blank">link</a></td>
+
         </tr>
         </tbody>
       </table>

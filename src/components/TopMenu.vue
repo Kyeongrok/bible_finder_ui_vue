@@ -20,7 +20,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/naver-shopping">네이버 쇼핑 데이터</a></li>
-              <li><a class="dropdown-item" href="#">메뉴2</a></li>
+              <li><a class="dropdown-item" href="/excel">엑셀다운로드</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">메뉴3</a></li>
             </ul>
