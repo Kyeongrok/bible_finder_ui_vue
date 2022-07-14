@@ -28,7 +28,8 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <input class="form-control me-2" type="search" @keyup.enter="reverseMessage" v-model="input" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2" type="search" @keydown.enter="keyDown" v-model="input"
+             placeholder="Search" aria-label="Search">
     </div>
     <div class="col-md-3">
       <button @click="reverseMessage" class="btn btn-outline-success" type="button">검색</button>
@@ -55,7 +56,16 @@ export default {
       this.searchResults = []
       this.input = ''
     },
-    reverseMessage: function () {
+    keyDown: function () {
+      console.log("press enter to search")
+      const input = this.input
+      if (input == '') {
+        alert("검색어를 입력해주세요 ex)롬5:5-10");
+      } else {
+        this.search();
+      }
+    },
+    search: function () {
       const input = this.input
       const bibleAddrRe = new RegExp('[가-힣]{1,2}[0-9]{1,3}:[0-9]{1,3}-[0-9]{1,3}', 'g');
       if (input.search(bibleAddrRe) >= 0) {
@@ -96,7 +106,7 @@ export default {
     }
   },
   created() {
-    this.reverseMessage();
+    this.search();
     const dr = {'recentUrl':window.location.href, 'preUrl':document.referrer}
     // 이전 방문 페이지, 현재 방문 페이지 메세지 보내기
     fetch(`https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text=${JSON.stringify(dr)}`)
