@@ -7,7 +7,11 @@
     </p>
     <div class="row">
       <div class="col-md-2">
-        마지막 검색: <button class="btn-dark">{{this.history}}</button>
+        마지막 검색:
+        <br/>
+        <button @click="clickHistoryBtn" class="btn btn-dark" :key="i" v-for="(result, i) in this.history">
+          {{result}}
+        </button>
       </div>
     </div>
     <table class="table table-striped">
@@ -32,15 +36,19 @@
              placeholder="Search" aria-label="Search">
     </div>
     <div class="col-md-3">
-      <button @click="reverseMessage" class="btn btn-outline-success" type="button">검색</button>
+      <button @click="search" class="btn btn-outline-success" type="button">검색</button>
       <button @click="empty" class="btn btn-outline-primary" type="button">초기화</button>
     </div>
   </div>
+  <BibleFinderFooter/>
+
 </template>
 
 <script>
+import BibleFinderFooter from "@/components/BibleFinderFooter";
 export default {
   name: 'HelloWorld',
+  components: {BibleFinderFooter},
   props: {
     msg: String
   },
@@ -65,6 +73,9 @@ export default {
         this.search();
       }
     },
+    clickHistoryBtn: function(event) {
+      this.input = event.currentTarget.textContent
+    },
     search: function () {
       const input = this.input
       const bibleAddrRe = new RegExp('[가-힣]{1,2}[0-9]{1,3}:[0-9]{1,3}-[0-9]{1,3}', 'g');
@@ -88,7 +99,8 @@ export default {
           }).then(data => {
             console.log(data)
             this.searchResults.push(data)
-            this.$cookies.set('data', input)
+            // 꺼내서 추가해야 함
+            this.$cookies.set('data', this.$cookies.get('data') + ',' + input)
             this.setHistoryFromCookie()
         })
       }
@@ -102,7 +114,9 @@ export default {
     setHistoryFromCookie: function() {
       this.history=[];
       const cookie = this.$cookies.get('data')
-      this.history.push(cookie)
+      cookie.split(',').forEach(item => {
+        this.history.push(item)
+      })
     }
   },
   created() {

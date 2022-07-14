@@ -4,6 +4,7 @@ import HelloWorld from "@/views/BibleFinder";
 import NaverShoppingCrawl from "@/views/NaverShoppingCrawl";
 import ExcelDownload from "@/views/ExcelDownload";
 import ElectronicCar from "@/views/ElectronicCar";
+import ReleaseNote from "@/views/ReleaseNote";
 
 
 const routerHistory = createWebHistory()
@@ -12,6 +13,7 @@ const router = createRouter({
   routes:[
     { path:"/", name: "home", component:HelloWorld },
     { path:"/seats-arr", name: "seats-arr", component:about },
+    { path:"/release-note", name: "release-note", component:ReleaseNote },
     { path:"/naver-shopping", name: "naver-shopping", component:NaverShoppingCrawl },
     { path:"/excel", name: "excel", component:ExcelDownload },
     { path:"/electronic", name: "electronic-car", component:ElectronicCar },

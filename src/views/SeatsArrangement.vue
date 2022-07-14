@@ -56,14 +56,16 @@
       </tbody>
     </table>
   </div>
+  <BibleFinderFooter/>
 </template>
 
 <script>
 import BadgeMember from "@/components/InputMember";
+import BibleFinderFooter from "@/components/BibleFinderFooter";
 
 export default {
   name: "SeatsSep",
-  components: {BadgeMember},
+  components: {BibleFinderFooter, BadgeMember},
   data(){
     return{
       names:[],
